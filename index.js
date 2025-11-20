@@ -146,14 +146,28 @@ function calculateRevenueByDestination() {
 // CHALLENGE 12: Find which user has made the most bookings
 // NO RESTRICTION You are encouraged to use map, filter, reduce, and Object.keys/Object.values/Object.entries where appropriate.
 function findUserWithMostBookings() {
-
-
+    let max = 0, userIndex = 0;
+    spaceData.users.forEach((user, index) => {
+        if (user.totalBookings > max) {
+            max = user.totalBookings;
+            userIndex = index
+        }
+    })
+    return spaceData.users[userIndex];
 }
 
 // CHALLENGE 13: Find bookings between specific dates
 // RESTRICTION use Only for, while, and standard logic.
 function filterBookingsByDate(startDate, endDate) {
+    let results = [];
+    let start = new Date(startDate);
+    let end = new Date(endDate);
+    for (let i = 0; i < spaceData.bookings.length; i++) {
+        let bookingDate = new Date(spaceData.bookings[i].travelDate);
+        if (start < bookingDate && bookingDate < end) results.push(spaceData.bookings[i])
 
+    }
+    return results;
 
 }
 
