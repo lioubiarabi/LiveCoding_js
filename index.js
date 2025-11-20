@@ -2,7 +2,7 @@ let spaceData = {};
 
 async function loadData() {
     try {
-        const response = await fetch('data.json');
+        const response = await fetch('./data.json');
         spaceData = await response.json();
         console.log('Awesome! Data loaded successfully!');
         return spaceData;
@@ -15,12 +15,12 @@ async function loadData() {
 loadData();
 
 
+console.log(spaceData)
 
 // CHALLENGE 1: Count how many destinations we have
 // RESTRICTION use Only for, while, and standard logic.
 function countTotalDestinations() {
-   
-    
+    return spaceData.destinations.length;
 }
 
 // CHALLENGE 2: Find destinations that are available for booking
@@ -45,15 +45,15 @@ function calculateTotalRevenue() {
 // CHALLENGE 5: Find a user by their email address
 // RESTRICTION use Only for, while, and standard logic.
 function findUserByEmail(email) {
-   
-    
+
+
 }
 
 // CHALLENGE 6: Count all passengers across every booking
 // RESTRICTION use Only for, while, and standard logic.
 function countTotalPassengers() {
-   
-    
+
+
 }
 
 // CHALLENGE 7: Group bookings by their status (confirmed, pending, etc.)
@@ -64,13 +64,13 @@ function groupBookingsByStatus() {
     //   confirmed: [booking1, booking2...],
     //   pending: [booking3...]
     // }
-   
+
 }
 
 // CHALLENGE 8: Find the most expensive booking
 // RESTRICTION use Only for, while, and standard logic.
 function findMostExpensiveBooking() {
-    
+
 
 }
 
@@ -79,14 +79,14 @@ function findMostExpensiveBooking() {
 function getBookingSummary() {
     // We want to make each booking simpler - just show:
     // id, destination, number of passengers, and total price
-    
+
 }
 
 // CHALLENGE 10: Update a booking's status
 // RESTRICTION use Only for, while, and standard logic.
 function updateBookingStatus(bookingId, newStatus) {
-    
-    
+
+
 }
 
 
@@ -95,36 +95,36 @@ function updateBookingStatus(bookingId, newStatus) {
 function calculateRevenueByDestination() {
     // We want an object that shows total revenue for each destination:
     // { 'Moon Base Alpha': 195000, 'Mars Colony One': 250000 }
-   
+
 
 }
 
 // CHALLENGE 12: Find which user has made the most bookings
 // NO RESTRICTION You are encouraged to use map, filter, reduce, and Object.keys/Object.values/Object.entries where appropriate.
 function findUserWithMostBookings() {
-  
+
 
 }
 
 // CHALLENGE 13: Find bookings between specific dates
 // RESTRICTION use Only for, while, and standard logic.
 function filterBookingsByDate(startDate, endDate) {
-    
-    
+
+
 }
 
 // CHALLENGE 14: Get a list of all passenger names from all bookings
 // NO RESTRICTION You are encouraged to use map, filter, reduce, and Object.keys/Object.values/Object.entries where appropriate.
 function getAllPassengerNames() {
-   
-    
+
+
 }
 
 // CHALLENGE 15: Add a new booking with proper validation
 // RESTRICTION use Only for, while, and standard logic.
 function addNewBooking(bookingData) {
-   
-    
+
+
 }
 
 // ========================
@@ -133,31 +133,31 @@ function addNewBooking(bookingData) {
 
 
 async function testAllChallenges() {
- 
+
     await loadData();
-    
+
     console.log('TESTing !\n');
-    
+
     console.log('LEVEL 1:');
     console.log('1. How many destinations?', countTotalDestinations());
     console.log('2. Available destinations:', getAvailableDestinations());
     console.log('3. First booking ever:', getFirstBooking());
     console.log('4. Total money made:', calculateTotalRevenue());
     console.log('5. Find John Smith:', findUserByEmail('john.smith@email.com'));
-    
+
     console.log('\nLEVEL 2:');
     console.log('6. Total passengers:', countTotalPassengers());
     console.log('7. Bookings by status:', groupBookingsByStatus());
     console.log('8. Most expensive trip:', findMostExpensiveBooking());
     console.log('9. Booking summaries:', getBookingSummary());
     console.log('10. Update booking:', updateBookingStatus('BK001', 'cancelled'));
-    
+
     console.log('\nLEVEL 3:');
     console.log('11. Money per destination:', calculateRevenueByDestination());
     console.log('12. Most bookings by:', findUserWithMostBookings());
     console.log('13. March bookings:', filterBookingsByDate('2024-03-01', '2024-04-01'));
     console.log('14. All passenger names:', getAllPassengerNames());
-    
+
     // Try adding a new booking
     try {
         const newBooking = {
