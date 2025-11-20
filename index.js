@@ -71,7 +71,14 @@ function groupBookingsByStatus() {
     //   confirmed: [booking1, booking2...],
     //   pending: [booking3...]
     // }
+    let status = {};
 
+    for (let i = 0; i < spaceData.bookings.length; i++) {
+        let currentBooking = spaceData.bookings[i];
+        if(!status[currentBooking.status]) status[currentBooking.status] = [];
+        status[currentBooking.status].push(currentBooking)
+    }
+    return status;
 }
 
 // CHALLENGE 8: Find the most expensive booking
