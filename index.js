@@ -175,28 +175,95 @@ function filterBookingsByDate(startDate, endDate) {
 // NO RESTRICTION You are encouraged to use map, filter, reduce, and Object.keys/Object.values/Object.entries where appropriate.
 function getAllPassengerNames() {
     let passengers = [];
-for (let i = 0; i < spaceData.bookings.length; i++) {
-    for (let j = 0; j < spaceData.bookings[i].passengers.length; j++) {
-        let name = spaceData.bookings[i].passengers[j].name;
-        
-        // skip if the username is exist
-        let exist = false
-        for (let k = 0; k < passengers.length; k++) {
-            if(passengers[k] == name) exist = true;
+    for (let i = 0; i < spaceData.bookings.length; i++) {
+        for (let j = 0; j < spaceData.bookings[i].passengers.length; j++) {
+            let name = spaceData.bookings[i].passengers[j].name;
+
+            // skip if the username is exist
+            let exist = false
+            for (let k = 0; k < passengers.length; k++) {
+                if (passengers[k] == name) exist = true;
+            }
+
+            !exist && (passengers.push(name))
         }
 
-        !exist && (passengers.push(name))
     }
-    
-}
-return passengers;
+    return passengers;
 
 }
 
 // CHALLENGE 15: Add a new booking with proper validation
 // RESTRICTION use Only for, while, and standard logic.
 function addNewBooking(bookingData) {
+    // check the data
+    if (!bookingData.userId) {
+        throw new Error("there's no userId");
+    } else {
 
+    }
+    if (!bookingData.destinationId || typeof bookingData.destinationId != "number" || bookingData.destinationId < 0) {
+        throw new Error("there's no userId");
+    } else {
+
+    }
+    if (!bookingData.destination) {
+        throw new Error("there's no destination");
+    } else {
+        let exist = false;
+        for (let i = 0; i < spaceData.destinations.length; i++) {
+            if (spaceData.destinations[i].name == bookingData.destination) exist = true
+        }
+        if (!exist) {
+            throw new Error("can't find the destination");
+        }
+    }
+    if (!bookingData.package) {
+        throw new Error("there's no package");
+    } else {
+        let exist = false;
+        for (let i = 0; i < spaceData.packages.length; i++) {
+            if (spaceData.packages[i].id == bookingData.package) exist = true
+        }
+        if (!exist) {
+            throw new Error("can't find the package name");
+        }
+    }
+    if (!bookingData.passengers || !bookingData.passengers.length) {
+        throw new Error("there's no passengers");
+    } else {
+
+    }
+    if (!bookingData.travelDate) {
+        throw new Error("there's no travelDate");
+    } else {
+        // check if the date pass today
+        let today = new Date(),
+            travelDate = new Date(bookingData.travelDate);
+        if (travelDate < today) {
+            throw new Error("travel date must me after today")
+        }
+
+    }
+    if (!bookingData.returnDate) {
+        throw new Error("there's no returnDate");
+    } else {
+        let travelDate = new Date(bookingData.travelDate);
+        if (travelDate > new Date(bookingData.returnDate)) {
+            throw new Error("retunr date must be after travel date")
+        }
+    }
+    if (!bookingData.totalPrice || typeof bookingData.totalPrice != "number" || bookingData.totalPrice < 0) {
+        throw new Error("there's no valid totalPrice");
+    }
+    if (!bookingData.status || bookingData.status != "pending") {
+        throw new Error("there's no valid status");
+    }
+
+    spaceData.bookings.push(bookingData);
+
+    console.log("booking added with success");
+    return spaceData.bookings;
 
 }
 
@@ -239,9 +306,9 @@ async function testAllChallenges() {
             destination: 'Mars Colony One',
             package: 'basic',
             passengers: [{ name: 'Bob Wilson', age: 45 }],
-            travelDate: '2024-07-01',
-            returnDate: '2024-07-03',
-            totalPrice: 250000,
+            travelDate: '2026-01-01',
+            returnDate: '2026-04-03',
+            totalPrice: 20000,
             status: 'pending'
         };
         console.log('15. Add new booking:', addNewBooking(newBooking));
