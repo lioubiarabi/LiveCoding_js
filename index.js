@@ -75,7 +75,7 @@ function groupBookingsByStatus() {
 
     for (let i = 0; i < spaceData.bookings.length; i++) {
         let currentBooking = spaceData.bookings[i];
-        if(!status[currentBooking.status]) status[currentBooking.status] = [];
+        if (!status[currentBooking.status]) status[currentBooking.status] = [];
         status[currentBooking.status].push(currentBooking)
     }
     return status;
@@ -84,15 +84,15 @@ function groupBookingsByStatus() {
 // CHALLENGE 8: Find the most expensive booking
 // RESTRICTION use Only for, while, and standard logic.
 function findMostExpensiveBooking() {
-let max = 0, bookingIndex = 0;
+    let max = 0, bookingIndex = 0;
 
-for (let i = 0; i < spaceData.bookings.length; i++) {
-    if(spaceData.bookings[i].totalPrice > max) {
-        max = spaceData.bookings[i].totalPrice;
-        bookingIndex = i;
+    for (let i = 0; i < spaceData.bookings.length; i++) {
+        if (spaceData.bookings[i].totalPrice > max) {
+            max = spaceData.bookings[i].totalPrice;
+            bookingIndex = i;
+        }
     }
-}
-return spaceData.bookings[bookingIndex];
+    return spaceData.bookings[bookingIndex];
 }
 
 // CHALLENGE 9: Create a simple summary of all bookings
@@ -104,7 +104,7 @@ function getBookingSummary() {
     for (let i = 0; i < spaceData.bookings.length; i++) {
         let currentBooking = spaceData.bookings[i];
         let booking = {
-            id:currentBooking.id,
+            id: currentBooking.id,
             destination: currentBooking.destination,
             numberOfPassengers: currentBooking.passengers.length,
             totalPrice: currentBooking.totalPrice
@@ -117,8 +117,10 @@ function getBookingSummary() {
 // CHALLENGE 10: Update a booking's status
 // RESTRICTION use Only for, while, and standard logic.
 function updateBookingStatus(bookingId, newStatus) {
-
-
+    for (let i = 0; i < spaceData.bookings.length; i++) {
+        if (spaceData.bookings[i].id == bookingId) spaceData.bookings[i].status = newStatus;
+        return spaceData.bookings[i];
+    }
 }
 
 
@@ -127,8 +129,18 @@ function updateBookingStatus(bookingId, newStatus) {
 function calculateRevenueByDestination() {
     // We want an object that shows total revenue for each destination:
     // { 'Moon Base Alpha': 195000, 'Mars Colony One': 250000 }
+    let bookingsR = {};
+    for (let i = 0; i < spaceData.destinations.length; i++) {
+        const name = spaceData.destinations[i].name;
+        let rev = 0;
 
+        for (let j = 0; j < spaceData.bookings.length; j++) {
+            if (spaceData.bookings[j].destination == name) rev += spaceData.bookings[j].totalPrice;
+        }
+        bookingsR[name] = rev
+    }
 
+    return bookingsR;
 }
 
 // CHALLENGE 12: Find which user has made the most bookings
