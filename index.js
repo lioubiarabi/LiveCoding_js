@@ -147,7 +147,7 @@ function calculateRevenueByDestination() {
 // NO RESTRICTION You are encouraged to use map, filter, reduce, and Object.keys/Object.values/Object.entries where appropriate.
 function findUserWithMostBookings() {
     let max = 0, userIndex = 0;
-    spaceData.users.forEach((user, index) => {
+    let users = spaceData.users.map((user, index) => {
         if (user.totalBookings > max) {
             max = user.totalBookings;
             userIndex = index
@@ -174,7 +174,22 @@ function filterBookingsByDate(startDate, endDate) {
 // CHALLENGE 14: Get a list of all passenger names from all bookings
 // NO RESTRICTION You are encouraged to use map, filter, reduce, and Object.keys/Object.values/Object.entries where appropriate.
 function getAllPassengerNames() {
+    let passengers = [];
+for (let i = 0; i < spaceData.bookings.length; i++) {
+    for (let j = 0; j < spaceData.bookings[i].passengers.length; j++) {
+        let name = spaceData.bookings[i].passengers[j].name;
+        
+        // skip if the username is exist
+        let exist = false
+        for (let k = 0; k < passengers.length; k++) {
+            if(passengers[k] == name) exist = true;
+        }
 
+        !exist && (passengers.push(name))
+    }
+    
+}
+return passengers;
 
 }
 
