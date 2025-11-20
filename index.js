@@ -5,6 +5,8 @@ async function loadData() {
         const response = await fetch('./data.json');
         spaceData = await response.json();
         console.log('Awesome! Data loaded successfully!');
+        console.log(spaceData)
+
         return spaceData;
     } catch (error) {
         console.log('Oops! Something went wrong loading the data:', error);
@@ -15,7 +17,6 @@ async function loadData() {
 loadData();
 
 
-console.log(spaceData)
 
 // CHALLENGE 1: Count how many destinations we have
 // RESTRICTION use Only for, while, and standard logic.
@@ -26,34 +27,40 @@ function countTotalDestinations() {
 // CHALLENGE 2: Find destinations that are available for booking
 // NO RESTRICTION You are encouraged to use map, filter, reduce, and Object.keys/Object.values/Object.entries where appropriate.
 function getAvailableDestinations() {
-
+    let ava = spaceData.destinations.filter(item => item.available);
+    return ava.length;
 }
 
 // CHALLENGE 3: Get the very first booking in our system
 // RESTRICTION use Only for, while, and standard logic.
 function getFirstBooking() {
-
+    return spaceData.bookings[0];
 }
 
 // CHALLENGE 4: Calculate how much money we've made from all bookings
 // NO RESTRICTION You are encouraged to use map, filter, reduce, and Object.keys/Object.values/Object.entries where appropriate.
 function calculateTotalRevenue() {
-
-
+    let total = 0;
+    for (let i = 0; i < spaceData.bookings.length; i++) total += spaceData.bookings[i].totalPrice;
+    return total;
 }
 
 // CHALLENGE 5: Find a user by their email address
 // RESTRICTION use Only for, while, and standard logic.
 function findUserByEmail(email) {
-
-
+    for (let i = 0; i < spaceData.users.length; i++) {
+        if (spaceData.users[i].email == email) return spaceData.users[i];
+    }
 }
 
 // CHALLENGE 6: Count all passengers across every booking
 // RESTRICTION use Only for, while, and standard logic.
 function countTotalPassengers() {
-
-
+    let total = 0;
+    for (let i = 0; i < spaceData.bookings.length; i++) {
+        total += spaceData.bookings[i].passengers.length;
+    }
+    return total;
 }
 
 // CHALLENGE 7: Group bookings by their status (confirmed, pending, etc.)
