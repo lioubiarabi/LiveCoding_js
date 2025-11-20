@@ -84,8 +84,15 @@ function groupBookingsByStatus() {
 // CHALLENGE 8: Find the most expensive booking
 // RESTRICTION use Only for, while, and standard logic.
 function findMostExpensiveBooking() {
+let max = 0, bookingIndex = 0;
 
-
+for (let i = 0; i < spaceData.bookings.length; i++) {
+    if(spaceData.bookings[i].totalPrice > max) {
+        max = spaceData.bookings[i].totalPrice;
+        bookingIndex = i;
+    }
+}
+return spaceData.bookings[bookingIndex];
 }
 
 // CHALLENGE 9: Create a simple summary of all bookings
