@@ -100,7 +100,18 @@ return spaceData.bookings[bookingIndex];
 function getBookingSummary() {
     // We want to make each booking simpler - just show:
     // id, destination, number of passengers, and total price
-
+    let bookings = [];
+    for (let i = 0; i < spaceData.bookings.length; i++) {
+        let currentBooking = spaceData.bookings[i];
+        let booking = {
+            id:currentBooking.id,
+            destination: currentBooking.destination,
+            numberOfPassengers: currentBooking.passengers.length,
+            totalPrice: currentBooking.totalPrice
+        };
+        bookings.push(booking)
+    }
+    return bookings;
 }
 
 // CHALLENGE 10: Update a booking's status
